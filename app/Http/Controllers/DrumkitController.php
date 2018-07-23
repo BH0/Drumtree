@@ -5,6 +5,7 @@
 namespace App\Http\Controllers; 
 
 use App\Drum; 
+use App\Bookmark; // to add 
 use App\User; // may not need this 
 
 use Illuminate\Support\Facades\Auth; // may not need 
@@ -21,6 +22,9 @@ class DrumkitController extends Controller {
         $drum = new Drum(); 
         // * Item name (may include model/manufacturer) 
         $drum->drumname = $request['drumname']; 
+        $drum->cost = (double) $request['cost']; 
+        $drum->location = $request['location']; 
+        $drum->contact = $request['contact']; 
         $drum->body = $request['body']; // description 
         $file = $request->file('image'); 
         // $filename = $request['email'] . '-' . $drum->id . '.jpg';  
@@ -46,5 +50,36 @@ class DrumkitController extends Controller {
     public function getDrums(Request $request) { 
         $drums = Drum::orderBy('created_at', 'desc')->get(); 
 		return view('drums', ["drums" => $drums]); 
-    }
+    } 
+
+    public function postBookmarkDrum(Request $request) { 
+        $drum_id = $request['drumId']; 
+        $is_bookmark = $request['isBookmark'] === 'true';
+        $update = false; 
+        $drum = Drum::find($drum_id); 
+        if (!$drum) { 
+            return null; 
+        }  
+        $user = Auth::user(); 
+        $bookmark = $user->bookmarks()->where('drum_id', $drum_id)->first(); 
+        if ($bookmark) { 
+            $bookmarked = $bookmark->bookmark; 
+            $update = true; 
+            if ($bookmarked == $is_bookmark) { 
+                $bookmark->delete(); 
+                return null; 
+            }
+        } else { 
+            $bookmark = new Bookmark(); 
+        } 
+        $bookmark->bookmark = $is_bookmark; 
+        $bookmark->user_id = $user->id; 
+        $bookmark->drum_id = $drum->id; 
+        if ($update) {
+            $bookmark->update();
+        } else {
+            $bookmark->save();
+        }
+        return null; 
+    } 
 } 

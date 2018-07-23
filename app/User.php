@@ -10,5 +10,9 @@ class User extends Model implements Authenticatable {
 
     public function drums() { 
         return $this->hasMany('App\Drum'); 
-    }
+    } 
+
+    public function bookmarks() { 
+        return $this->hasMany('App\Bookmark'); 
+    } 
 } 

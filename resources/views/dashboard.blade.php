@@ -18,7 +18,10 @@
 <b><!-- @ include('includes.message') --></b> 
 <form action="{{ route('drum.create') }}" method="post" enctype="multipart/form-data">> 
     <input type="text" name="drumname" /> <!-- name of drumkit --> 
+    <input type="text" name="location" placeholder="location" /> <!-- may become a dropdown --> 
+    <input type="text" name="cost" placeholder="cost" /> 
     <textarea class="description" name="body"></textarea>  
+    <input type="text" name="contact" placeholder="Preferred method of contact" /> 
     <label for="file-upload">Upload image [JPG] of item</label> 
     <input type="file" name="image" /> 
     <input type="submit" value="Submit kit" /> 

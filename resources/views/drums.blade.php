@@ -1,14 +1,21 @@
 @extends('layouts.master')
 @section('content')
     <h1>Items For Sale</h1> 
+    <div class="sort"> 
+        <select name="my_html_select_box">
+            <option>Sort by</option>
+            <option selected="yes">cheapest</option>
+            <option>Nearest</option> 
+            <option>Recently posted</option> 
+        </select>
+    </div> 
     <div class="drums"> 
-        @foreach($drums as $drum) 
-            <article class="drum" data-postid="{{ $drum->id }}"> 
+        @foreach($drums as $drum)
+            <article class="drum" data-drumId="{{ $drum->id }}"> 
                 <h3>{{ $drum->drumname }}</h3> 
                 @if(Storage::disk('local')->has($drum->drumname . '-' . $drum->drumname . '.jpg'))
                     <div class="drum-image"> 
                         <section>
-                                <!-- "drum.image" may become "drums.image" --> 
                                 <!-- increase image size on hover over image (with CSS/JS) --> 
                                 <img src="{{ route('drum.image', ['filename' => $drum->drumname . '-' . $drum->drumname . '.jpg']) }}" alt="drum image" width="120" height="120"> 
                         </section>
@@ -17,13 +24,23 @@
                     <b>No image</b> 
                 @endif 
 
-                <!-- $drum->user_id  should  become $drum->user->username  --> 
-                Posted by {{ $drum->user_id }} on {{ $drum->created_at }} 
-                <a href="#" class="track">Track/Favourite/I'm interesred</a> 
-                @if(Auth::user() == $drum->user) 
-                    <a href="#">Delete item [to do] </a> 
-                @endif 
-            </article> 
-        @endforeach 
+                <b><h5>${{ $drum->cost}}</h5></b> 
+                <p>Location [Settlement-name]: <b>{{ $drum->locaiton }}</b> </p>  
+                <p>{{ $drum->body }}</p> 
+                <!-- $drum->user_id  should  become $drum->user->username  -->  
+                <p>Posted by <b>{{ $drum->user_id }}</b> on <b>{{ $drum->created_at }}</b></p> 
+                <b>Contact: {{ $drum->contact }}</b> 
+                    <a href="#" class="bookmark">{{ Auth::user()->bookmarks()->where('drum_id', $drum->id)->first() ? Auth::user()->bookmarks()->where('drum_id', $drum->id)->first()->bookmark == 1 ? 'bookmarked' : 'bookmark' : 'bookmark'  }}</a> |
+                    <!-- @ if(Auth::user() == $drum->user)
+                        <a href="#">Delete item [to do] </a> 
+                    @ endif --> 
+            </article>
+        @endforeach
     </div> 
+
+    <script> 
+        let token = '{{ Session::token() }}';
+        let urlBookmark = '{{ route('bookmark') }}'; 
+    </script> 
+
  @endsection 

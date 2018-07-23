@@ -45,7 +45,11 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'drums'
     ]); 
 
-    // make become "postDrum" or 
+    Route::post('/bookmark', [
+        'uses' => 'DrumkitController@postBookmarkDrum', 
+        'as' => 'bookmark'
+    ]); 
+    
     Route::post('/post-drum', [ 
         'uses' => 'DrumkitController@postCreateDrum', 
         'as' => 'drum.create' 

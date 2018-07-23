@@ -17,9 +17,11 @@ class CreateDrumsTable extends Migration
             $table->increments('id');
             $table->timestamps(); 
             $table->text('drumname'); // name (and perhaps manufacturer/make + model) of drum 
-            $table->text('body'); 
+            $table->string('location'); 
+            $table->double ('cost'); 
+            $table->text('body'); // tables of type "text" may become type "string" 
             $table->text('image');  // path-to-image 
-            // contact-detail/s 
+            $table->text('contact'); 
             $table->integer('user_id'); 
         });
     }

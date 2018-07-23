@@ -1,0 +1,7 @@
+body { 
+    background-color: purple; 
+} 
+
+.is-bookmarked { 
+    border: 5px solid green; 
+} 

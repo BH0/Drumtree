@@ -12,3 +12,13 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+/// Increase Image of Drum on Hover/Mouse-over 
+.drum-image:hover { 
+  img { 
+    width: 200px; 
+    height: 200px; 
+  }
+} 
+
+// don't forget to compile into CSS 
