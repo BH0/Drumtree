@@ -5,7 +5,7 @@
 namespace App\Http\Controllers; 
 
 use App\Drum; 
-use App\Bookmark; // to add 
+use App\Bookmark; 
 use App\User; // may not need this 
 
 use Illuminate\Support\Facades\Auth; // may not need 
@@ -51,6 +51,12 @@ class DrumkitController extends Controller {
         $drums = Drum::orderBy('created_at', 'desc')->get(); 
 		return view('drums', ["drums" => $drums]); 
     } 
+
+    /* 
+    public function getBookmarkedDrums(Request $request) { 
+        $drums = Drum::orderBy('created_at', 'desc')->get(); 
+        dd($drums);         
+    } */ 
 
     public function postBookmarkDrum(Request $request) { 
         $drum_id = $request['drumId']; 

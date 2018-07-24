@@ -2,6 +2,10 @@
 namespace App\Http\Controllers; 
 
 use App\User; 
+use App\Drum; 
+use App\Bookmark;  
+
+use DB; 
 use Illuminate\Http\Request; 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth; 
@@ -9,9 +13,16 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller { 
 
     public function getDashboard() { 
+        $drums = Drum::orderBy('created_at', 'desc')->get(); 
+        $bookmarks = Bookmark::orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get(); 
+        return view('dashboard' , ['drums' => $drums, 'bookmarks' => $bookmarks]); 
+    } 
+    
+    /* 
+    public function getDashboard() { 
         // if (Auth::check()) { // user is logged in }  
         return view('dashboard');    
-    } 
+    } */ 
 
     public function postSignup(Request $request) { 
         

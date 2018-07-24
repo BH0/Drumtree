@@ -36,14 +36,16 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'dashboard' 
     ])->middleware('auth'); 
 
-    /* 
-    Route::get('/drums', function() { 
-        return view('drums'); 
-    }); */ 
     Route::get('/drums', [ 
         'uses' => 'DrumkitController@getDrums', 
         'as' => 'drums'
     ]); 
+
+    /* 
+    Route::get('/bookmarkedDrums', [
+        'uses' => 'DrumkitController@getBokmarkedDrums', 
+        'as' => 'bookmarkedDrums'
+    ]); */ 
 
     Route::post('/bookmark', [
         'uses' => 'DrumkitController@postBookmarkDrum', 
