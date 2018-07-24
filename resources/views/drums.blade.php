@@ -2,15 +2,15 @@
 @section('content')
     <h1>Items For Sale</h1> 
     <div class="sort"> 
-        <select name="my_html_select_box">
-            <option>Sort by</option>
-            <option selected="yes">cheapest</option>
-            <option>Nearest</option> 
-            <option>Recently posted</option> 
-        </select>
+        <select name="sort" id="sort-drowndown-options"> 
+            <option value="newest" selected="yes">newest</option> 
+            <option value="cheapest"><a href="{{ route('cheapest') }}">cheapest</a></option>
+            <!-- <option>Nearest</option> --> 
+        </select> 
+        <button id="sort-button">Sort</button> 
     </div> 
     <div class="drums"> 
-        @foreach($drums as $drum)
+        @foreach($drums as $drum) 
             <article class="drum" data-drumId="{{ $drum->id }}"> 
                 <h3>{{ $drum->drumname }}</h3> 
                 @if(Storage::disk('local')->has($drum->drumname . '-' . $drum->drumname . '.jpg'))
@@ -41,6 +41,10 @@
     <script> 
         let token = '{{ Session::token() }}';
         let urlBookmark = '{{ route('bookmark') }}'; 
+
+        /// Sort [Drums] 
+        let urlNewest = '{{ route('drums') }}'; 
+        let urlCheapest = '{{ route('cheapest') }}'; 
     </script> 
 
  @endsection 

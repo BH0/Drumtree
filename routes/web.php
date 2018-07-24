@@ -41,6 +41,12 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'drums'
     ]); 
 
+    // may become get('/cheapest-drums')
+    Route::get('/cheapest', [
+        'uses' => 'DrumkitController@getDrumsCheapest', 
+        'as' => 'cheapest' 
+    ]); 
+
     /* 
     Route::get('/bookmarkedDrums', [
         'uses' => 'DrumkitController@getBokmarkedDrums', 

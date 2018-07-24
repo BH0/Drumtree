@@ -46,18 +46,16 @@ class DrumkitController extends Controller {
         return new Response($file, 200);	
 	} 
 
-    /// Get Drums View 
-    public function getDrums(Request $request) { 
+    /// Get Drums View/s  
+    public function getDrums() { 
         $drums = Drum::orderBy('created_at', 'desc')->get(); 
-		return view('drums', ["drums" => $drums]); 
+        return view('drums', ["drums" => $drums]); 
     } 
-
-    /* 
-    public function getBookmarkedDrums(Request $request) { 
-        $drums = Drum::orderBy('created_at', 'desc')->get(); 
-        dd($drums);         
-    } */ 
-
+    public function getDrumsCheapest() { 
+        $drums = Drum::orderBy('cost', 'asc')->get();
+        return view('drums', ["drums" => $drums]); 
+    } 
+    
     public function postBookmarkDrum(Request $request) { 
         $drum_id = $request['drumId']; 
         $is_bookmark = $request['isBookmark'] === 'true';

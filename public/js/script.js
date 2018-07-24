@@ -1,3 +1,35 @@
+//// Sort 
+let sortDropdownOptions = document.querySelector("#sort-drowndown-options");
+let sortButton = document.querySelector("#sort-button"); 
+let option; 
+sortButton.addEventListener("click", event => { 
+    event.preventDefault(); 
+    option  = sortDropdownOptions.options[sortDropdownOptions.selectedIndex].value; 
+
+    // Cheapest Drums/Items  
+    if (option == "cheapest") { 
+        $.ajax({
+            method: 'GET',
+            url: urlCheapest,
+        }).done( () => { 
+            window.location.replace(urlCheapest);
+        }).fail(error => { 
+            console.log(error); 
+        });
+    } else { 
+        // Newest Drums/Items [Default]
+        $.ajax({
+            method: 'GET',
+            url: urlNewest,
+        }).done( () => { 
+            window.location.replace(urlNewest);
+        }).fail(error => { 
+            console.log(error); 
+        }); 
+    } 
+}); 
+
+//// Bookmark 
 /// Style Drum-items Depending on their Bookmark Status 
 document.querySelectorAll("article").forEach((element, index) => { 
     if (element.querySelector("a").innerText != "bookmark") { 
