@@ -66,5 +66,10 @@ Route::group(['middleware' => ['web']], function () {
         'uses' => 'DrumkitController@getDrumImage', 
         'as' => 'drum.image' 
     ]); 
+
+    Route::get('/delete-drum/{id}', [
+        'uses' => 'DrumkitController@deleteDrum', 
+        'as' => 'drum.delete'
+    ]); 
 }); 
 

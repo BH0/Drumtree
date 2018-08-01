@@ -36,9 +36,16 @@ class DrumkitController extends Controller {
         // * Price 
         $message = 'There was an error'; 
         if ($request->user()->drums()->save($drum)) { 
-            $message = 'Post successfully created'; 
+            $message = 'Item successfully created'; 
         } 
-        return redirect()->route('dashboard')->with(['message' => $message]); 
+        return redirect()->route('dashboard'); 
+    } 
+
+    public function deleteDrum(Request $request) { 
+        $drum_id = $request['id']; 
+        $drum = Drum::find($drum_id); 
+        $drum->delete(); 
+        return redirect()->route('dashboard'); 
     } 
     
 	public function getDrumImage($filename) { 

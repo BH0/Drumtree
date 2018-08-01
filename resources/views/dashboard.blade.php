@@ -49,12 +49,10 @@
             <p>{{ $drum->body }}</p> 
             <!-- $drum->user_id  should  become $drum->user->username  -->  
             <p>Posted by <b>{{ $drum->user_id }}</b> on <b>{{ $drum->created_at }}</b></p> 
-            <b>Contact: {{ $drum->contact }}</b> 
+            <b>Contact: {{ $drum->contact }}</b> <br /> 
                 <a href="#" class="bookmark">{{ Auth::user()->bookmarks()->where('drum_id', $drum->id)->first() ? Auth::user()->bookmarks()->where('drum_id', $drum->id)->first()->bookmark == 1 ? 'bookmarked' : 'bookmark' : 'bookmark'  }}</a> |
-                <!-- @ if(Auth::user() == $drum->user)
-                    <a href="#">Delete item [to do] </a> 
-                @ endif --> 
-        </article>
+                <a href="{{ route('drum.delete', ['drum_id' => $drum->id]) }}">Delete Drum</a> 
+        </article> 
     @endif 
 @endforeach 
 
@@ -84,9 +82,6 @@
                     <p>Posted by <b>{{ $drum->user_id }}</b> on <b>{{ $drum->created_at }}</b></p> 
                     <b>Contact: {{ $drum->contact }}</b> 
                         <a href="#" class="bookmark">{{ Auth::user()->bookmarks()->where('drum_id', $drum->id)->first() ? Auth::user()->bookmarks()->where('drum_id', $drum->id)->first()->bookmark == 1 ? 'bookmarked' : 'bookmark' : 'bookmark'  }}</a> |
-                        <!-- @ if(Auth::user() == $drum->user)
-                            <a href="#">Delete item [to do] </a> 
-                        @ endif --> 
                 </article>
             @endif 
         @endif 
