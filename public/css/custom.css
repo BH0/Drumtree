@@ -5,3 +5,8 @@ body {
 .is-bookmarked { 
     border: 5px solid green; 
 } 
+
+.post-drum-form .input-container { 
+    display: block; 
+} 
+

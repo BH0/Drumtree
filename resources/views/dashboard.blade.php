@@ -8,7 +8,7 @@
 @extends('layouts.master')
 @section('content')
 
-<h1>{Username's} Dashboard</h1> 
+<h1>{{Auth::user()->username}}'s Dashboard</h1> 
 <!-- 
     if (authenticated): 
         <div>Email: {username's email } 
@@ -16,16 +16,36 @@
 
 <h2>Post Drum Kit</h2> 
 <b><!-- @ include('includes.message') --></b> 
-<form action="{{ route('drum.create') }}" method="post" enctype="multipart/form-data">> 
-    <input type="text" name="drumname" /> <!-- name of drumkit --> 
-    <input type="text" name="location" placeholder="location" /> <!-- may become a dropdown --> 
-    <input type="text" name="cost" placeholder="cost" /> 
-    <textarea class="description" name="body"></textarea>  
-    <input type="text" name="contact" placeholder="Preferred method of contact" /> 
-    <label for="file-upload">Upload image [JPG] of item</label> 
-    <input type="file" name="image" /> 
-    <input type="submit" value="Submit kit" /> 
-    <input type="hidden" value="{{ Session::token() }}" name="_token" /> 
+<form action="{{ route('drum.create') }}" method="post" enctype="multipart/form-data"> 
+    <div class="post-drum-form container"> 
+        <div class="row"> 
+            <div class="col-md-12 col-offset-12"> 
+                <div class="input-container" style="padding-bottom:1em;"> 
+                    <input type="text" name="drumname" placeholder="product-name" style="width:40em;" /> <!-- name of drumkit --> 
+                </div> 
+                <div class="input-container" style="padding-bottom:1em;">
+                    <input type="text" name="location" placeholder="location" style="width:40em;" /> <!-- may become a dropdown --> 
+                </div> 
+                <div class="input-container" style="padding-bottom:1em;">
+                    <input type="text" name="cost" placeholder="cost" style="width:40em;" /> 
+                </div> 
+                <div class="input-container" style="padding-bottom:1em;">
+                    <textarea class="description" name="body" placeholder="description" style="width:40em;"></textarea>  
+                </div> 
+                <div class="input-container" style="padding-bottom:1em;">
+                    <input type="text" name="contact" placeholder="Preferred method of contact" style="width:40em;" /> 
+                </div> 
+                <div class="input-container" style="padding-bottom:1em;">
+                    <label for="file-upload">Upload image [JPG] of item</label> 
+                    <input type="file" name="image" class="btn btn-warning" /> 
+                </div> 
+                <div class="input-container" style="padding-bottom:1em;">
+                    <input type="submit" value="Submit kit" class="btn btn-success" /> 
+                    <input type="hidden" value="{{ Session::token() }}" name="_token" /> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
 </form> 
 
 <h2>Your Posted Items</h2> <!-- left-column --> 
