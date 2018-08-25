@@ -17,8 +17,8 @@
 <h2>Post Drum Kit</h2> 
 <b><!-- @ include('includes.message') --></b> 
 <form action="{{ route('drum.create') }}" method="post" enctype="multipart/form-data">> 
-    <input type="text" name="drumname" /> <!-- name of drumkit --> 
-    <textarea class="description" name="body"></textarea>  
+    <input type="text" name="drumname" placeholder="item-name" /> <!-- name of drumkit --> 
+    <textarea class="description" name="body" placeholder="item-description"></textarea>  
     <label for="file-upload">Upload image [JPG] of item</label> 
     <input type="file" name="image" /> 
     <input type="submit" value="Submit kit" /> 

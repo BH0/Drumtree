@@ -16,6 +16,11 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
+    Route::get('/welcome', [
+        'uses' => 'DrumkitController@getWelcome', 
+        'as' => 'welcome'
+    ]);
+
     Route::post('/signup', [ 
         'uses' => 'UserController@postSignup', 
         'as' => 'signup'
