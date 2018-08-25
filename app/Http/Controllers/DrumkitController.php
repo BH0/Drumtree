@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Storage;
 
 class DrumkitController extends Controller { 
     
+    public function getWelcome() { 
+        // if (!Auth::check()) { // user is not logged in }  
+        return view('welcome'); 
+    } 
+
     public function postCreateDrum(Request $request) { 
         // validation 
         $drum = new Drum(); 

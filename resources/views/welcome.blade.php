@@ -9,6 +9,7 @@
 @section('content') 
 
     <form action="{{ route('signup') }}" method="post"> 
+        <b>Please use a username and password more than 8 characters long</b> 
         <input type="email" name="email" placeholder="email"/> 
         <input type="text" name="username" placeholder="username"/> 
         <input type="password" name="password" placeholder="password" /> 
